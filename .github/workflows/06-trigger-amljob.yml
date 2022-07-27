@@ -18,9 +18,6 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Set Azure ML workspace as default
-      run: |
-        az configure --defaults group="${{ github.event.inputs.resource_group }}"
-        az configure --defaults workspace="${{ github.event.inputs.aml_workspace }}"
     - name: Submit Training Job
       run: |
         cd src
