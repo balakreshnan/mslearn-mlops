@@ -40,7 +40,8 @@ def process_data(df):
                'Age']].values, df['Diabetic'].values
 
     # train/test split
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.30, random_state=0)
 
     # return splits and encoder
     return X_train, X_test, y_train, y_test
@@ -53,7 +54,7 @@ def train_model(reg_rate, X_train, X_test, y_train, y_test):
 
     # return model
     return model
-
+ 
 def parse_args():
     # setup arg parser
     parser = argparse.ArgumentParser()
@@ -70,7 +71,7 @@ def parse_args():
     # return args
     return args
 
-# run script
+# run script 
 if __name__ == "__main__":
     # add space in logs
     print("\n\n")
