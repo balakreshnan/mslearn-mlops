@@ -10,6 +10,6 @@ inputs:
     mode: ro_mount
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: devinstance
+compute: cpu-cluster
 experiment_name: diabetes-data-example
 description: Experiment to predict diabetes
