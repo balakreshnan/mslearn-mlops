@@ -54,7 +54,8 @@ def train_model(reg_rate, X_train, X_test, y_train, y_test):
 
     # return model
     return model
- 
+
+
 def parse_args():
     # setup arg parser
     parser = argparse.ArgumentParser()
@@ -71,7 +72,8 @@ def parse_args():
     # return args
     return args
 
-# run script 
+
+# run script
 if __name__ == "__main__":
     # add space in logs
     print("\n\n")
