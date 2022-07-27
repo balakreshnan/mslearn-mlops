@@ -27,7 +27,7 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Submit training job
-      Id: diabetes-mlops-challenge
+      id: diabetes-mlops-challenge
       run: |
         cd src
         az ml job create --file job.yml --resource-group "${{ github.event.inputs.resource_group }}" --workspace-name "${{ github.event.inputs.aml_workspace }}"
