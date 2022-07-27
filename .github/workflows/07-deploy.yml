@@ -50,4 +50,4 @@ jobs:
     - name: Submit Training Job
       run: |
         cd src
-        az ml job create --file job.yml --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops"
+        az ml model list --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops"
