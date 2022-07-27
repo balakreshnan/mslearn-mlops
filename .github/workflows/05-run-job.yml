@@ -1,6 +1,12 @@
 name: Run AML job
 
 on:
+  label:
+    types:
+      - created
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       resource_group:
