@@ -62,7 +62,7 @@ jobs:
     - name: Update Deployment for above model
       run: |
         cd src
-        az ml online-deployment create --name blue --endpoint diabetesendpoint -f blue-deployment.yml --all-traffic --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        az ml online-deployment create --name blue --endpoint diabetesendpoint --file blue-deployment.yml --all-traffic --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Show the endpoint
       run: |
         cd src
