@@ -2,12 +2,12 @@ $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.sch
 name: blue
 endpoint_name: diabetesendpoint
 model:
-  path: azureml:diabetes-data-example/model/
+  path: azureml:/subscriptions/c46a9435-c957-4e6c-a0f4-b9a597984773/resourceGroups/rg-dev-mlops/providers/Microsoft.MachineLearningServices/workspaces/mlw-dev-mlops/models/diabetes-data-example/model/
 code_configuration:
   code: src/model/
   scoring_script: score.py
 environment: 
-  conda_file: diabetes-data-example/model/conda.yml
+  conda_file: src/conda.yml
   image: mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04:20210727.v1
 instance_type: Standard_DS2_v2
 instance_count: 1
