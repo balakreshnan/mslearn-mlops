@@ -1,0 +1,72 @@
+name: Deploy to Development and Production
+
+on:
+  pull_request:
+    branches:
+    - main
+  workflow_dispatch:
+    inputs:
+      resource_group:
+        description: 'Resource group name'
+        required: true
+        default: 'rg-dev-mlops' 
+        type: string
+      aml_workspace:
+        description: 'Azure Machine Learning workspace name'
+        required: true
+        default: 'mlw-dev-mlops' 
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Development
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Submit Training Job
+      run: |
+        cd src
+        az ml job create --file job.yml --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops"
+  deployment:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set Defaults for Azure Sub
+      run: |
+        az account set --subscription c46a9435-c957-4e6c-a0f4-b9a597984773
+        az configure --defaults workspace=mlw-dev-mlops group=rg-dev-mlops
+    - name: Register Model
+      run: |
+        cd src
+        az ml model create -n diabetes-data-example -p runs:/musing_stone_4wj53py92j/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+    - name: Create Online Endpoint
+      run: |
+        cd src
+        az ml online-endpoint create --name diabetesendpoint -f endpoint.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+    - name: Update Deployment for above model
+      run: |
+        cd src
+        az ml online-deployment create --name blue --endpoint diabetesendpoint -f blue-deployment.yml --all-traffic --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+    - name: Show the endpoint
+      run: |
+        cd src
+        az ml online-endpoint show -n diabetesendpoint --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+    - name: Invoke the endpoint
+      run: |
+        cd src
+        az ml online-endpoint invoke --name diabetesendpoint --request-file sample-request.json --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
