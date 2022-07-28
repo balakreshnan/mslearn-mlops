@@ -47,6 +47,14 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set Defaults for Azure Sub
+      run: |
+        az account set --subscription c46a9435-c957-4e6c-a0f4-b9a597984773
+        az configure --defaults workspace=mlw-dev-mlops group=rg-dev-mlops
+    - name: Register Model
+      run: |
+        cd src
+        az ml model create -n diabetes-data-example -p runs:/musing_stone_4wj53py92j/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Submit Training Job
       run: |
         cd src
