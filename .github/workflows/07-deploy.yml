@@ -1,4 +1,4 @@
-name: Deploy to Development and Production
+name: Deploy-list to Development and Production
 
 on:
 #  pull_request:
