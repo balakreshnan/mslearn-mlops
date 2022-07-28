@@ -58,7 +58,7 @@ jobs:
     - name: Delete Online Endpoint
       run: |
         cd src
-        az ml online-endpoint delete --name diabetesendpoint --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        az ml online-endpoint delete --name diabetesendpoint --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops --yes
     - name: Create Online Endpoint
       run: |
         cd src
