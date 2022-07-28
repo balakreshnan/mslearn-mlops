@@ -1,9 +1,9 @@
 name: Trigger GitHub Actions with trunk-based development
 
 on:
-  pull_request:
-    branches:
-    - main
+#  pull_request:
+#    branches:
+#    - main
   workflow_dispatch:
     inputs:
       resource_group:
