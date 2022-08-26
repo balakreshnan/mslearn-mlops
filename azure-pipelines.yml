@@ -36,6 +36,6 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      az login --tenant fdpo.onmicrosoft.com
+      az login --tenant fdpo.onmicrosoft.com --service-principal -u ${clientid} -p ${secret} --tenant ${tenantid}
       az --version
       az account show
