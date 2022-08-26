@@ -1,0 +1,5 @@
+$schema: https://azuremlschemas.azureedge.net/latest/model.schema.json
+name: diabetes-data-example
+path: azureml:diabetes-data-example
+type: mlflow_model
+description: Model created from azure ml model repository.

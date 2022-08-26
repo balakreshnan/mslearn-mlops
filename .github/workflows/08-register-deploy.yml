@@ -33,7 +33,10 @@ jobs:
     - name: Submit Training Job
       run: |
         cd src
-        az ml job create --file job.yml --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops"
+        run_id=$(az ml job create --file job.yml --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops" --query name -o tsv)
+    - name: display run id
+      run: |
+        az ml job show -n $run_id --web
   deployment:
     runs-on: ubuntu-latest
     needs: build
@@ -54,7 +57,7 @@ jobs:
     - name: Register Model
       run: |
         cd src
-        az ml model create -n diabetes-data-example -p runs:/plum_square_mtkfy91zg6/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        az ml model create -n diabetes-data-example -p runs:/$run_id/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Delete Online Endpoint
       continue-on-error: true
       run: |
