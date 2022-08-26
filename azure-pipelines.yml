@@ -37,7 +37,7 @@ steps:
     script: |
       # Write your commands here
       
-      az login --service-principal -u $clientid -p $secret --tenant $tenantid
+      az login --service-principal -u ${{clientid}} -p ${{secret}} --tenant ${{tenantid}}
 
 - task: Bash@3
   inputs:
