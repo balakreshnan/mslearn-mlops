@@ -33,7 +33,11 @@ jobs:
     - name: Submit Training Job
       run: |
         cd src
-        az ml job create --file job.yml --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops" --name trainrun1
+        run_id=$(az ml job create --file job.yml --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops" --query name -o tsv)
+    - name: Display Run_id
+      run: |
+        cd src
+        echo "$run_id"
   deployment:
     runs-on: ubuntu-latest
     needs: build
