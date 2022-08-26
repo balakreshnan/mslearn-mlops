@@ -34,6 +34,7 @@ jobs:
       run: |
         cd src
         run_id=$(az ml job create --file job.yml --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops" --query name -o tsv)
+        echo "$run_id"
     - name: Display Run_id
       run: |
         cd src
