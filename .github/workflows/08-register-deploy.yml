@@ -59,20 +59,20 @@ jobs:
       continue-on-error: true
       run: |
         cd src
-        az ml online-endpoint delete --name diabetesendpoint --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops --yes
+        az ml online-endpoint delete --name diabetesendpointbb22 --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops --yes
     - name: Create Online Endpoint
       run: |
         cd src
-        az ml online-endpoint create --name diabetesendpoint -f endpoint.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        az ml online-endpoint create --name diabetesendpointbb22 -f endpoint.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Update Deployment for above model
       run: |
         cd src
-        az ml online-deployment create --name blue --endpoint diabetesendpoint --file blue-deployment.yml --all-traffic --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        az ml online-deployment create --name blue --endpoint diabetesendpointbb22 --file blue-deployment.yml --all-traffic --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Show the endpoint
       run: |
         cd src
-        az ml online-endpoint show -n diabetesendpoint --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        az ml online-endpoint show -n diabetesendpointbb22 --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Invoke the endpoint
       run: |
         cd src
-        az ml online-endpoint invoke --name diabetesendpoint --request-file sample-request.json --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        az ml online-endpoint invoke --name diabetesendpointbb22 --request-file sample-request.json --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
