@@ -46,3 +46,10 @@ steps:
       # Write your commands here
       az --version
       # az account show
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd src
+      az ml job create --file job.yml --resource-group "rg-dev-mlops" --workspace-name "mlw-dev-mlops"
