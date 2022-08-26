@@ -54,7 +54,7 @@ jobs:
     - name: Register Model
       run: |
         cd src
-        az ml model create -n diabetes-data-example -p runs:/dreamy_pipe_br55thhn8q/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+        az ml model create -n diabetes-data-example -p runs:/trainrun1/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Delete Online Endpoint
       continue-on-error: true
       run: |
