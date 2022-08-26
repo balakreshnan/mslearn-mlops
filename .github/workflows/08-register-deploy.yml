@@ -49,12 +49,12 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Set Defaults for Azure Sub
       run: |
-        az account set --subscription c46a9435-c957-4e6c-a0f4-b9a597984773
+        az account set --subscription 80ef7369-572a-4abd-b09a-033367f44858
         az configure --defaults workspace=mlw-dev-mlops group=rg-dev-mlops
-#    - name: Register Model
-#      run: |
-#        cd src
-#        az ml model create -n diabetes-data-example -p runs:/musing_stone_4wj53py92j/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+    - name: Register Model
+      run: |
+        cd src
+        az ml model create -n diabetes-data-example -p runs:/plum_square_mtkfy91zg6/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Delete Online Endpoint
       run: |
         cd src
