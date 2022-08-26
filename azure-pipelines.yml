@@ -56,3 +56,45 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'echo "Run ID from above Job Run is $run_id stored in environment variable"'
+
+- task: bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd src
+      az ml model create -n diabetes-data-example -p runs:/trainrun1/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+
+- task: bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+        cd src
+        az ml online-endpoint delete --name diabetesendpointbb22 --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops --yes
+
+- task: bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+        cd src
+        az ml online-endpoint create --name diabetesendpointbb22 -f endpoint.yml --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+
+- task: bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+        cd src
+        az ml online-deployment create --name blue --endpoint diabetesendpointbb22 --file blue-deployment.yml --all-traffic --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+
+- task: bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+        cd src
+        az ml online-endpoint show -n diabetesendpointbb22 --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
+
+- task: bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+        cd src
+        az ml online-endpoint invoke --name diabetesendpointbb22 --request-file sample-request.json --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
