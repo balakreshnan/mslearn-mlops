@@ -56,6 +56,7 @@ jobs:
         cd src
         az ml model create -n diabetes-data-example -p runs:/plum_square_mtkfy91zg6/model --type mlflow_model --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops
     - name: Delete Online Endpoint
+    - continue-on-error: true
       run: |
         cd src
         az ml online-endpoint delete --name diabetesendpoint --resource-group rg-dev-mlops --workspace-name mlw-dev-mlops --yes
