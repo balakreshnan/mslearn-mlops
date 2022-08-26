@@ -36,6 +36,6 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      az login --tenant fdpo.onmicrosoft.com
+      az login --tenant fdpo.onmicrosoft.com az login --use-device-code
       az --version
       az account show
