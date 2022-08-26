@@ -1,9 +1,9 @@
 name: Deploy to Development and Production
 
 on:
-#  pull_request:
-#    branches:
-#    - main
+  pull_request:
+    branches:
+    - main
   workflow_dispatch:
     inputs:
       resource_group:
