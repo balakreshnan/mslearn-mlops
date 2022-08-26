@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: blue
-endpoint_name: diabetesendpoint
+endpoint_name: diabetesendpointbb22
 model: azureml:diabetes-data-example@latest
 instance_type: Standard_DS2_v2
 instance_count: 1
