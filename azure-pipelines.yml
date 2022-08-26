@@ -37,7 +37,7 @@ steps:
     script: |
       # Write your commands here
       
-      az login --service-principal -u "40861cb6-cefc-4904-a8ab-528434625238" -p "~tx8Q~0iEpHzrEMD64V1TuP1Qg7eE.H5vm_LebYU" --tenant "16b3c013-d300-468d-ac64-7eda0820b6d3"
+      az login --service-principal -u $clientid -p $secret --tenant $tenantid
 
 - task: Bash@3
   inputs:
