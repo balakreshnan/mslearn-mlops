@@ -9,6 +9,11 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+ clientid: $(clientid) # this will not work because the secret variable needs to be mapped as env
+ secret: $(secret) # this works because it's not a secret.
+ tenantid: $(tenantid) # this works because it's not a secret.
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -37,7 +42,7 @@ steps:
     script: |
       # Write your commands here
       
-      az login --service-principal -u ${{clientid}} -p ${{secret}} --tenant ${{tenantid}}
+      az login --service-principal -u $(clientid) -p $(secret) --tenant $(tenantid)
 
 - task: Bash@3
   inputs:
